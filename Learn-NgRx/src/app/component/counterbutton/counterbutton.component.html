@@ -1,11 +1,21 @@
-<h1>Counter Application</h1>
-<button mat-raised-button color="primary" (click)="onIncrement()">
-  Increment (+)
-</button>
-<button mat-raised-button color="accent" (click)="onDecrement()">
-  Decrement (-)
-</button>
-<button mat-raised-button color="warn" (click)="onReset()">Reset</button>
-<button mat-raised-button color="warn" (click)="change()">
-  Change Channel Name
-</button>
+<router-outlet>
+  <h1>Counter Application</h1>
+  <button mat-raised-button color="primary" (click)="onIncrement()">
+    Increment (+)
+  </button>
+  <button mat-raised-button color="accent" (click)="onDecrement()">
+    Decrement (-)
+  </button>
+  <button mat-raised-button color="warn" (click)="onReset()">Reset</button>
+  <button mat-raised-button color="warn" (click)="change()">
+    Change Channel Name
+  </button>
+  <h1>{{ (counter$ | async)?.channelname }}</h1>
+<h2>
+  Counter value is <b>{{ (counter$ | async)?.counter }}</b>
+</h2>
+
+  <!-- <app-counterbutton></app-counterbutton>
+<app-counterdisplay></app-counterdisplay>
+<app-customcounter></app-customcounter> -->
+</router-outlet>

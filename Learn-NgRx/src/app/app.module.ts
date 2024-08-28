@@ -12,6 +12,8 @@ import { MaterialModule } from './material.module';
 import { CustomcounterComponent } from './component/customcounter/customcounter.component';
 import { FormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HeaderComponent } from './component/header/header.component';
+import { HomeComponent } from './component/home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     CounterbuttonComponent,
     CounterdisplayComponent,
     CustomcounterComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({ maxAge: false, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],
