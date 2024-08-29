@@ -8,6 +8,7 @@ import {
   reset,
 } from 'src/app/shared/store/counter.actions';
 import { CounterModel } from 'src/app/shared/store/counter.model';
+import { getcounter } from 'src/app/shared/store/counter.selecter';
 
 @Component({
   selector: 'app-counterbutton',
@@ -21,8 +22,16 @@ export class CounterbuttonComponent implements OnInit {
   counter$!: Observable<CounterModel>;
   constructor(private store: Store<{ counter: CounterModel }>) {}
   ngOnInit(): void {
-    this.counter$ = this.store.select('counter');
-    console.log(this.counter$);
+
+     this.counterSubscribe = this.store.select(getcounter).subscribe((data) => {
+     // console.log(data.counter);
+      this.counterValue = data;
+    
+      console.log('counter button');
+    });
+
+    // this.counter$ = this.store.select('counter');
+    // console.log(this.counter$);
   }
   onIncrement() {
     this.store.dispatch(increment());
@@ -39,5 +48,10 @@ export class CounterbuttonComponent implements OnInit {
         channelname: 'Welcome to Suresh Technologies Pvt Ltd',
       })
     );
+  }
+  ngOnDestroy(): void {
+    if (this.counterSubscribe) {
+      this.counterSubscribe.unsubscribe();
+    }
   }
 }
