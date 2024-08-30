@@ -9,6 +9,7 @@ import {
 } from 'src/app/shared/store/counter.actions';
 import { CounterModel } from 'src/app/shared/store/counter.model';
 import { getcounter } from 'src/app/shared/store/counter.selecter';
+import { AppStateModel } from 'src/app/shared/store/global/appstate.model';
 
 @Component({
   selector: 'app-counterbutton',
@@ -20,7 +21,7 @@ export class CounterbuttonComponent implements OnInit {
   channelName: string = '';
   counterSubscribe!: Subscription;
   counter$!: Observable<CounterModel>;
-  constructor(private store: Store<{ counter: CounterModel }>) {}
+  constructor(private store: Store<AppStateModel>) {}
   ngOnInit(): void {
 
      this.counterSubscribe = this.store.select(getcounter).subscribe((data) => {
