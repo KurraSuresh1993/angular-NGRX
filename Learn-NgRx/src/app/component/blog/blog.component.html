@@ -1,17 +1,40 @@
-
-
-<div style="text-align: center;">
-    <h1>TECHNOLOGY BLOG</h1>
-    <button (click)="AddBlog()" mat-raised-button color="primary">Add Blog</button>
+<div style="text-align: center">
+  <h1>TECHNOLOGY BLOG</h1>
+  <button (click)="AddBlog()" mat-raised-button color="primary">
+    Add Blog
+  </button>
 </div>
-<div class="container">
-    <mat-card class="book-card" *ngFor="let blog of blogList">
-        <mat-card-header>
-            <h1>{{blog.title}}</h1>
-        </mat-card-header>
-        <mat-card-content>
+<div *ngIf="!blogInfo.errorMessage">
+  <mat-card class="book-card" *ngIf="!blogInfo.blogList.length">
+    <h1>No data found</h1>
+  </mat-card>
+  <mat-card class="book-card" *ngFor="let blog of blogInfo.blogList">
+    <mat-card-header>
+      <h1>{{ blog.title }}</h1>
+      <div style="text-align: right; width: 100%">
+        <button (click)="editBlog(blog.id)" mat-raised-button color="primary">
+          <!-- <mat-icon fontIcon="edit"></mat-icon> -->Edit</button
+        >&nbsp;
 
-            <p>{{blog.description}}</p>
-        </mat-card-content>
-    </mat-card>
+        <button (click)="deleteBlog(blog.id)" mat-raised-button color="accent">
+          <!-- <mat-icon fontIcon="delete"></mat-icon> -->
+          Delete
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ blog.description }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div>
+  <mat-card class="book-card" *ngIf="blogInfo.errorMessage">
+    <mat-card-header>
+      <h1>Error Occured</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <p style="color: red">{{ blogInfo.errorMessage }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
