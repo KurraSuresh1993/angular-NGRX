@@ -2,7 +2,11 @@ import { Component, Inject, OnInit, inject } from '@angular/core';
 import { Form, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { addblog, updateblog } from 'src/app/shared/store/blog/blog.actions';
+import {
+  addblog,
+  loadspinner,
+  updateblog,
+} from 'src/app/shared/store/blog/blog.actions';
 import { BlogModel } from 'src/app/shared/store/blog/blog.model';
 import { getblogbyid } from 'src/app/shared/store/blog/blog.selecter';
 import { AppStateModel } from 'src/app/shared/store/global/appstate.model';
@@ -50,18 +54,21 @@ export class AddblogComponent implements OnInit {
   saveBlog(): void {
     if (this.blogForm.valid) {
       const _blogInput: BlogModel = {
-        id: 0,
+        id: this.data.isedit ? (this.blogForm.value.id as number) : 0,
         title: this.blogForm.value.title as string,
         description: this.blogForm.value.description as string,
       };
-      if (this.data.isedit) {
-        _blogInput.id = this.blogForm.value.id as number;
-        this.store.dispatch(updateblog({ bloginput: _blogInput }));
-      } else {
-        this.store.dispatch(addblog({ bloginput: _blogInput }));
-      }
+      this.store.dispatch(loadspinner({ IsLoaded: true }));
+      setTimeout(() => {
+        if (this.data.isedit) {
+          _blogInput.id = this.blogForm.value.id as number;
+          this.store.dispatch(updateblog({ bloginput: _blogInput }));
+        } else {
+          this.store.dispatch(addblog({ bloginput: _blogInput }));
+        }
 
-      this.closePopUp();
+        this.closePopUp();
+      }, 1000);
     }
   }
 }

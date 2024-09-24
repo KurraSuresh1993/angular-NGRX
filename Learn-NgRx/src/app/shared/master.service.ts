@@ -7,18 +7,23 @@ import { BlogModel } from './store/blog/blog.model';
   providedIn: 'root',
 })
 export class MasterService {
+  private URL = 'https://localhost:44371/api/Blogs';
   constructor(private http: HttpClient) {}
 
   GetAllBlogs(): Observable<BlogModel[]> {
-    return this.http.get<BlogModel[]>('http://localhost:3000/blogs');
+    return this.http.get<BlogModel[]>(this.URL);
   }
   CreateBlog(blogInput: BlogModel) {
-    return this.http.post('http://localhost:3000/blogs', blogInput).pipe(
+    return this.http.post(this.URL, blogInput).pipe(
       tap(() => {
-        this.http.get<BlogModel>(
-          'http://localhost:3000/blogs?_limit=1&_sort=id&_order=desc'
-        );
+        this.http.get<BlogModel>(this.URL + '/' + blogInput.id);
       })
     );
+  }
+  UpdateBlog(blogInput: BlogModel) {
+    return this.http.put(this.URL + '/' + blogInput.id, blogInput);
+  }
+  DeleteBlog(blogId: number) {
+    return this.http.delete(this.URL + '/' + blogId);
   }
 }

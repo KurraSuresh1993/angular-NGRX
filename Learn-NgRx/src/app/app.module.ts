@@ -21,6 +21,9 @@ import { AddblogComponent } from './component/addblog/addblog.component';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { BlogEffects } from './shared/store/blog/blog.effects';
+import { AppEffects } from './shared/store/global/app.effects';
+import { LoadingspinnerComponent } from './component/loadingspinner/loadingspinner.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { BlogEffects } from './shared/store/blog/blog.effects';
     HomeComponent,
     BlogComponent,
     AddblogComponent,
+    LoadingspinnerComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,7 @@ import { BlogEffects } from './shared/store/blog/blog.effects';
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: false, logOnly: !isDevMode() }),
     HttpClientModule,
-    EffectsModule.forRoot([BlogEffects]),
+    EffectsModule.forRoot([BlogEffects, AppEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

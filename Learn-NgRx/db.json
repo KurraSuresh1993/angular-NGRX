@@ -2,18 +2,13 @@
   "blogs": [
     {
       "id": 1,
-      "title": ".NET",
-      "description": "Angular is free and open source"
+      "title": "ttt",
+      "description": "tttt"
     },
     {
       "id": 2,
-      "title": ".NET CORE",
-      "description": "Angular is free,open source and it support cross platform"
-    },
-    {
-      "id": 0,
-      "title": "Angular JS",
-      "description": "First Version"
+      "title": "eee",
+      "description": "eeee"
     }
   ]
 }
